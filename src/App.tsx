@@ -1,4 +1,5 @@
-import { Music, Zap, Heart, Skull } from 'lucide-react';
+import { Music, Zap, Heart, Skull, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -133,7 +134,7 @@ function App() {
                 <div className="border-4 border-yellow-400 p-8 transform -rotate-2 hover:rotate-0 transition-transform bg-black overflow-hidden">
                   <h3 className="text-3xl font-black text-cyan-400 mb-4 uppercase">Mantra</h3>
                   <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 mb-6">
-                    "Sé tú mismo, todos los demás ya están ocupados"
+                    {/* "Sé tú mismo, todos los demás ya están ocupados" */}
                   </p>
 
                   {/* Carousel */}
@@ -172,6 +173,9 @@ function App() {
                       className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-pink-400 transform hover:scale-110"
                     >
                       <ChevronRight className="w-6 h-6 text-black" />
+
+
+
                     </button>
 
                     {/* Indicators */}
@@ -190,15 +194,7 @@ function App() {
                     </div>
                   </div>
                 </div>
-                 <div className="border-4 border-yellow-400 p-8 transform -rotate-2 hover:rotate-0 transition-transform bg-black">
-      <h3 className="text-3xl font-black text-cyan-400 mb-4 uppercase">Mantra</h3>
-      
-      <img 
-        src={imagen} 
-        alt="Mantra" 
-        className="w-full rounded-xl shadow-lg"
-      />
-    </div>
+ 
               </div>
             </div>
           </div>
