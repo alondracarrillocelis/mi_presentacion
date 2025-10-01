@@ -1,6 +1,30 @@
 import { Music, Zap, Heart, Skull } from 'lucide-react';
-import imagen from "../assets/imagen.jpg";
+
 function App() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const images = [
+    'https://images.pexels.com/photos/1670977/pexels-photo-1670977.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/1389429/pexels-photo-1389429.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/1540406/pexels-photo-1540406.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/1047442/pexels-photo-1047442.jpeg?auto=compress&cs=tinysrgb&w=800',
+    'https://images.pexels.com/photos/1699161/pexels-photo-1699161.jpeg?auto=compress&cs=tinysrgb&w=800'
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextImage = () => {
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Background chaos */}
@@ -106,6 +130,66 @@ function App() {
                   </ul>
                 </div>
 
+                <div className="border-4 border-yellow-400 p-8 transform -rotate-2 hover:rotate-0 transition-transform bg-black overflow-hidden">
+                  <h3 className="text-3xl font-black text-cyan-400 mb-4 uppercase">Mantra</h3>
+                  <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-cyan-400 mb-6">
+                    "Sé tú mismo, todos los demás ya están ocupados"
+                  </p>
+
+                  {/* Carousel */}
+                  <div className="relative group mt-6">
+                    <div className="relative h-64 overflow-hidden border-4 border-pink-500">
+                      {images.map((img, index) => (
+                        <div
+                          key={index}
+                          className={`absolute inset-0 transition-all duration-700 ${
+                            index === currentImage
+                              ? 'opacity-100 translate-x-0'
+                              : index < currentImage
+                                ? 'opacity-0 -translate-x-full'
+                                : 'opacity-0 translate-x-full'
+                          }`}
+                        >
+                          <img
+                            src={img}
+                            alt={`Slide ${index + 1}`}
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Navigation buttons */}
+                    <button
+                      onClick={prevImage}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 bg-cyan-500 p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-cyan-400 transform hover:scale-110"
+                    >
+                      <ChevronLeft className="w-6 h-6 text-black" />
+                    </button>
+                    <button
+                      onClick={nextImage}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-500 p-2 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-pink-400 transform hover:scale-110"
+                    >
+                      <ChevronRight className="w-6 h-6 text-black" />
+                    </button>
+
+                    {/* Indicators */}
+                    <div className="flex justify-center gap-2 mt-4">
+                      {images.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImage(index)}
+                          className={`w-3 h-3 rotate-45 transition-all ${
+                            index === currentImage
+                              ? 'bg-yellow-400 scale-125'
+                              : 'bg-white opacity-50 hover:opacity-100'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
                  <div className="border-4 border-yellow-400 p-8 transform -rotate-2 hover:rotate-0 transition-transform bg-black">
       <h3 className="text-3xl font-black text-cyan-400 mb-4 uppercase">Mantra</h3>
       
